@@ -28,6 +28,7 @@ public class SqlSessionUtil {
             sqlSession = sqlSessionFactory.openSession(true);
             System.out.println("test1");
             System.out.println("test2");
+            System.out.println("测试分支");
         } catch (IOException e) {
             e.printStackTrace();
         }
