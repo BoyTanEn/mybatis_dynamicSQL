@@ -31,6 +31,7 @@ public class SqlSessionUtil {
             System.out.println("测试分支");
             System.out.println("主分支测试");
             System.out.println("酷酷酷酷酷");
+            System.out.println("在github中进行测试");
         } catch (IOException e) {
             e.printStackTrace();
         }
