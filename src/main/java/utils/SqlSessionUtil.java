@@ -26,7 +26,7 @@ public class SqlSessionUtil {
             SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(is);
             //true设置为默认自动提交。不待true是默认手动提交
             sqlSession = sqlSessionFactory.openSession(true);
-
+            System.out.println("test1");
         } catch (IOException e) {
             e.printStackTrace();
         }
