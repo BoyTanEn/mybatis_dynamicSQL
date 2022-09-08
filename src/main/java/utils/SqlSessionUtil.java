@@ -29,6 +29,7 @@ public class SqlSessionUtil {
             System.out.println("test1");
             System.out.println("test2");
             System.out.println("测试分支");
+            System.out.println("酷酷酷酷酷");
         } catch (IOException e) {
             e.printStackTrace();
         }
