@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--mybatis映射文件-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.DynamicSQLMapper">
+    <!--    void insert(@Param("emps") Emp[]emps);-->
+    <insert id="insert">
+        insert into t_emp
+        <foreach collection="emps" item="emp" separator="," open="values">
+            (null,#{emp.empName},#{emp.age},#{emp.gender},null)
+        </foreach>
+
+    </insert>
+
+
+    <!--    Emp getEmpByDynamic(Emp emp);-->
+
+    <select id="getEmpByDynamicTwo" resultType="emp">
+        select *
+        from t_emp
+        <where>
+            <choose>
+                <when test="empName != null and empName !=''">
+                    and emp_name = #{empName}
+                </when>
+                <when test="age != null and age !=''">
+                    and age = #{age}
+                </when>
+                <when test="gender !=null and gender !=''">
+                    and gender =#{gender}
+                </when>
+            </choose>
+        </where>
+
+    </select>
+
+
+    <select id="getEmpByDynamicOne" resultType="emp">
+        select *
+        from t_emp
+        <trim prefix="where" suffixOverrides="and">
+            <if test="empName != null and empName !=''">
+                emp_name = #{empName} and
+            </if>
+            <if test="age != null and age !=''">
+                age = #{age} and
+            </if>
+            <if test="gender !=null and gender !=''">
+                gender =#{gender} and
+            </if>
+        </trim>
+
+    </select>
+
+
+
+<!--    void delete(@Param("emps") List<Emp> emps);-->
+    <delete id="delete">
+        delete from t_emp
+<foreach collection="emps" item="emp" separator="or" open="where ">
+   emp_id=
+   #{emp.empId}
+</foreach>
+
+
+
+    </delete>
+
+
+</mapper>
+
+
+        <!--    分布查询多对一映射-->
+        <!--    <resultMap id="getEmpAndDeptResult" type="Emp">-->
+        <!--        <id column="emp_id" property="empId"></id>-->
+        <!--        <result column="emp_name" property="empName"></result>-->
+        <!--        <result column="age" property="age"></result>-->
+        <!--        <result column="gender" property="gender"></result>-->
+        <!--        <association property="dept" fetchType="lazy"-->
+        <!--                     select="mapper.DeptMapper.getEmpAndDeptByStepTwo"-->
+        <!--                     column="emp_id">-->
+        <!--        </association>-->
+        <!--    </resultMap>-->
